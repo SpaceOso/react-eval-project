@@ -11,7 +11,14 @@ import {getUser} from 'actions/userActions'
 import {getRepos} from 'actions/reposActions'
 import {getEvents} from 'actions/eventsActions'
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    repos: state.repos,
+    events: state.events
+  }
+}
+
 const mapDispatchToProps = dispatch => (bindActionCreators({
   getEvents,
   getRepos,
@@ -24,7 +31,10 @@ export default class App extends Component {
   static propTypes = {
     getEvents: PropTypes.func.isRequired,
     getRepos: PropTypes.func.isRequired,
-    getUser: PropTypes.func.isRequired
+    getUser: PropTypes.func.isRequired,
+    user: PropTypes.object,
+    repos: PropTypes.array,
+    events: PropTypes.array
   }
 
   componentDidMount () {
@@ -34,10 +44,19 @@ export default class App extends Component {
     getRepos()
     getEvents()
   }
+
+  checkLoad () {
+    console.log('user: ', this.props.user)
+    console.log('repos: ', this.props.repos)
+    console.log('events', this.props.events)
+  }
+
   render () {
     return (
       <div styleName='app'>
         <Header />
+        <p>{this.props.user.login}</p>
+        {this.checkLoad()}
       </div>
     )
   }
