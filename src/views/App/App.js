@@ -10,6 +10,7 @@ import Header from 'components/Header'
 import {getUser} from 'actions/userActions'
 import {getRepos} from 'actions/reposActions'
 import {getEvents} from 'actions/eventsActions'
+import User from '../../components/User/User'
 
 const mapStateToProps = state => {
   return {
@@ -55,7 +56,7 @@ export default class App extends Component {
     return (
       <div styleName='app'>
         <Header />
-        <p>{this.props.user.login}</p>
+        <User user={this.props.user} />
         {this.checkLoad()}
       </div>
     )
